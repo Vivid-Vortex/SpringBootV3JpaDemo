@@ -20,7 +20,7 @@ class ProductRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        product = Product.builder().name("Apple")
+        product = Product.builder().name("AppleBan")
                     .description("Apple description")
                     .sku("100ABC")
                     .price(new BigDecimal(100))

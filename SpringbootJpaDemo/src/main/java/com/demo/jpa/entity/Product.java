@@ -16,6 +16,12 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @Entity
+
+//Choose from @NamedQuery from jakarta
+@NamedQuery( // Look for method signature inside ProductRepository interface with method signature as "Product findByPrice(String price)"
+        name = "Product.findByPrice", //Product is the entity name, which is followed by custom choosen method name which is similar to defining method inside JpaRepository. Except for certain advantages, disadvantages and difference.
+        query = "SELECT p from Product where p.price = ?1" // ?1 - This is index type parameter passing to custom Jpql
+)
 @Table(
         name = "products",
         schema = "ecommerce", //Schema or database is same
