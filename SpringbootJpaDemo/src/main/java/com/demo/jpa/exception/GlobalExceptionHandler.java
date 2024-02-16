@@ -28,6 +28,5 @@ public class GlobalExceptionHandler {
         log.info("-----------------GlobalExceptionHandler executed-------------------");
         // Return the ErrorResponse as a ResponseEntity with the specified status code
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 }

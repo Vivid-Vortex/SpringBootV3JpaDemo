@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
+//TODO Analyse all the hibernate generated methods later on
 @SpringBootTest // It will load all the beans from our application at test phase
 class ProductRepositoryTest {
 
@@ -59,14 +61,86 @@ class ProductRepositoryTest {
 
     @Test
     void findByIdMethod() {
-        try {
-            Long id = 2L;
+            Long id = 1L;
             final Product product = productRepository.findById(id).orElseThrow();
             System.out.println(product);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
+    @Test
+    void saveAllMethod() {
+        final Product product2 = Product.builder().name("Banana")
+                .description("Banana description")
+                .sku("100ABCBB")
+                .price(new BigDecimal(102))
+                .active(true)
+                .imageUrl("banana.png")
+                .build();
 
+        final Product product3 = Product.builder().name("Ice cream")
+                .description("Ice cream description")
+                .sku("100ABCIJ")
+                .price(new BigDecimal(105))
+                .active(true)
+                .imageUrl("iceCream.png")
+                .build();
+
+        productRepository.saveAll(List.of(product2, product3));
+    }
+
+    @Test
+    void findAllMethod() {
+        final List<Product> productList = productRepository.findAll();
+        productList.forEach(product1 -> {
+            System.out.println(product1.getName());
+        });
+    }
+
+    @Test
+    void deleteByIdMethod() {
+        Long id = 1L;
+        productRepository.deleteById(id);
+    }
+
+    @Test
+    void deleteMethod() {
+        // find an entity by id
+        Long id = 2L;
+        final Optional<Product> productOptionalById = productRepository.findById(id);
+        final Product productById = productOptionalById.orElseThrow();
+
+        // delete(entity)
+        productRepository.delete(productById);
+    }
+
+    @Test
+    void deleteAllMethod() {
+        // Deleting all the rows or entries fro the database table
+//        productRepository.deleteAll();
+
+        // Deleting the specified entries only and not all as above
+        Long id = 8L;
+        Long id2 = 9L;
+
+        final Product product1 = productRepository.findById(id).orElseThrow();
+
+        final Product product2 = productRepository.findById(id2).orElseThrow();
+
+        productRepository.deleteAll(List.of(product1, product2));
+    }
+
+    @Test
+    void coutMethod() {
+        final long count = productRepository.count();
+        System.out.println(count);
+
+    }
+
+    //To check if any entity exists by the given id or not
+    @Test
+    void existByIdMethod(){
+        Long id = 11L;
+        final boolean existsById = productRepository.existsById(id);
+        System.out.println(existsById);
+    }
 }
