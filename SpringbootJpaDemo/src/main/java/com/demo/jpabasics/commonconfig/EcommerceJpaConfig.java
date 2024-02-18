@@ -33,16 +33,6 @@ public class EcommerceJpaConfig {
                 .build();
     }
 
-//    @Bean(name = "transactionDemoDataSource")
-//    public DataSource transactionDemoDataSource() {
-//        return DataSourceBuilder.create()
-//                .driverClassName("com.mysql.cj.jdbc.Driver")
-//                .url("jdbc:mysql://localhost:3306/transaction_demo?allowPublicKeyRetrieval=true&useSSL=false")
-//                .username("root")
-//                .password("Admin@12345")
-//                .build();
-//    }
-
     /** If you want to use JdbcTemplate in your application code*/
 //    @Bean(name = "ecommerceJdbcTemplate")
 //    public JdbcTemplate ecommerceJdbcTemplate() {
@@ -61,13 +51,6 @@ public class EcommerceJpaConfig {
         setCommonJpaProperties(properties);
         return properties;
     }
-
-//    @Bean(name = "transactionDemoJpaProperties")
-//    public JpaProperties transactionDemoJpaProperties() {
-//        JpaProperties properties = new JpaProperties();
-//        setCommonJpaProperties(properties);
-//        return properties;
-//    }
 
     private void setCommonJpaProperties(JpaProperties properties) {
         Map<String, String> hibernateProperties = new HashMap<>();
@@ -96,10 +79,6 @@ public class EcommerceJpaConfig {
     @Qualifier("ecommerceJpaProperties")
     private JpaProperties ecommerceJpaProperties;
 
-//    @Autowired
-//    @Qualifier("transactionDemoJpaProperties")
-//    private JpaProperties transactionDemoJpaProperties;
-
     @Bean(name = "ecommerceEntityManager")
 //    @Primary
     public LocalContainerEntityManagerFactoryBean ecommerceEntityManager() {
@@ -114,16 +93,4 @@ public class EcommerceJpaConfig {
         return em;
     }
 
-//    @Bean(name = "transactionDemoEntityManager")
-//    public LocalContainerEntityManagerFactoryBean transactionDemoEntityManager() {
-//        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-//        em.setDataSource(transactionDemoDataSource());
-//        em.setPackagesToScan("com.example.transaction_demo.entity");
-//
-//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-//        em.setJpaVendorAdapter(vendorAdapter);
-//        em.setJpaPropertyMap(transactionDemoJpaProperties.getProperties());
-//
-//        return em;
-//    }
 }
