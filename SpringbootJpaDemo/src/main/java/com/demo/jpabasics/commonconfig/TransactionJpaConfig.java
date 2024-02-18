@@ -44,6 +44,18 @@ public class TransactionJpaConfig {
         hibernateProperties.put("hibernate.show_sql", "true");
         hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
 
+        //Hibernate will use the dialect type to generate the queries based on the db vendor. In this case it's MySQL
+        /**
+         * This is springboot version 3.2.2. Pleae check the date timestamp.
+         2024-02-17T14:09:12.089+05:30  WARN 83724 --- [  restartedMain] org.hibernate.orm.deprecation            :
+         HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+
+         2024-02-17T14:09:12.090+05:30  WARN 83724 --- [  restartedMain] org.hibernate.orm.deprecation            :
+         HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+         */
+//        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");//Deprecated
+//        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");//Picked up by default by springboot. No need to mention explicitly
+
         properties.setProperties(hibernateProperties);
         properties.setShowSql(true);
         properties.setOpenInView(false);
