@@ -1,4 +1,4 @@
-package com.demo.jpa.exception;
+package com.demo.jpabasics.non_crud_junit_tested.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

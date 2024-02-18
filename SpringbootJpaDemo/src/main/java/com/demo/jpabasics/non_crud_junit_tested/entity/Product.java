@@ -1,4 +1,4 @@
-package com.demo.jpa.entity;
+package com.demo.jpabasics.non_crud_junit_tested.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,10 +17,55 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 
+/** --------@NamedQueries&@NamedQuery || @NamedNativeQueries/@NamedNativeQuery--------
+// You can either use the @NamedQueries or @NamedQuery, but not both at the same time on one enitity
 //Choose from @NamedQuery from jakarta
-@NamedQuery( // Look for method signature inside ProductRepository interface with method signature as "Product findByPrice(String price)"
+@NamedQuery( // Look for method signature inside ProductRepository interface with method signature as "Product findByPrice(BigDecimal price);"
         name = "Product.findByPrice", //Product is the entity name, which is followed by custom choosen method name which is similar to defining method inside JpaRepository. Except for certain advantages, disadvantages and difference.
-        query = "SELECT p from Product where p.price = ?1" // ?1 - This is index type parameter passing to custom Jpql
+        query = "SELECT p from Product p where p.price = ?1" // ?1 - This is index type parameter passing to custom Jpql
+)
+@NamedQuery( // Look for method signature inside ProductRepository interface with method signature as "Product findByPrice(BigDecimal price);"
+        name = "Product.findByPriceUsingNamedParam", //Product is the entity name, which is followed by custom choosen method name which is similar to defining method inside JpaRepository. Except for certain advantages, disadvantages and difference.
+        query = "SELECT p from Product p where p.price = :price" // :price - This is named type parameter passing to custom Jpql
+) */
+
+@NamedQueries(
+        {
+                @NamedQuery( // Look for method signature inside ProductRepository interface with method signature as "Product findByPrice(BigDecimal price);"
+                        name = "Product.findByPrice", //Product is the entity name, which is followed by custom choosen method name which is similar to defining method inside JpaRepository. Except for certain advantages, disadvantages and difference.
+                        query = "SELECT p from Product p where p.price = ?1" // ?1 - This is index type parameter passing to custom Jpql
+                ),
+                @NamedQuery( // Look for method signature inside ProductRepository interface with method signature as "Product findByPrice(BigDecimal price);"
+                        name = "Product.findByPriceUsingNamedParam", //Product is the entity name, which is followed by custom choosen method name which is similar to defining method inside JpaRepository. Except for certain advantages, disadvantages and difference.
+                        query = "SELECT p from Product p where p.price = :price" // :price - This is named type parameter passing to custom Jpql
+                )
+        }
+)
+
+//@NamedNativeQuery(
+//        name = "Product.findByDescription",
+//        query = "select * from products p where p.description = ?1",
+//        resultClass = Product.class
+//)
+//
+//@NamedNativeQuery(
+//        name = "Product.findByDescriptionUsingNamedParam",
+//        query = "select * from products p where p.description = :description",
+//        resultClass = Product.class
+//)
+@NamedNativeQueries(
+        {
+            @NamedNativeQuery(
+                    name = "Product.findByDescription",
+                    query = "select * from products p where p.description = ?1",
+                    resultClass = Product.class
+            ),
+            @NamedNativeQuery(
+                    name = "Product.findByDescriptionUsingNamedParam",
+                    query = "select * from products p where p.description = :description",
+                    resultClass = Product.class
+            )
+        }
 )
 @Table(
         name = "products",

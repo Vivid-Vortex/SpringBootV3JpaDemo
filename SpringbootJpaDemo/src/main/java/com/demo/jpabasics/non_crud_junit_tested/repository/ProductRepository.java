@@ -1,7 +1,9 @@
-package com.demo.jpa.repository;
+package com.demo.jpabasics.non_crud_junit_tested.repository;
 
-import com.demo.jpa.entity.Product;
+import com.demo.jpabasics.non_crud_junit_tested.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -71,7 +73,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
    List<Product> findTop3ByOrderByPriceDesc();
 
 
-   /** --------------NamedQuery----------------------------------------------
+   /** --------------NamedQueries (@NamedQuery&@NamedQueries || @NamedNativeQuery&@NamedNativeQueries)----------------------------------------------
     * use cases, advantages and disadvantage of namedquery annotation:
     * The @NamedQuery annotation in JPA serves several useful purposes:
     * 1. Centralized Query Definition:
@@ -107,6 +109,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     */
 
    /** @NamedQuery Defined over entity method signature*/
-   Product findByPrice(String price);
+   Product findByPrice(BigDecimal price);
+
+   Product findByPriceUsingNamedParam(@Param("price") BigDecimal price);
+
+   /** @NamedNativeQuery Defined over entity method signature*/
+   @Query(nativeQuery = true)
+   Product findByDescription(String description);
+
+   @Query(nativeQuery = true)
+   Product findByDescriptionUsingNamedParam(@Param("description") String description);
 
 }

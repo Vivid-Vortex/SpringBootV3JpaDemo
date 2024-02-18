@@ -1,6 +1,7 @@
-package com.demo.jpa.repository;
+package com.demo.jpabasics.repository;
 
-import com.demo.jpa.entity.Product;
+import com.demo.jpabasics.non_crud_junit_tested.entity.Product;
+import com.demo.jpabasics.non_crud_junit_tested.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
