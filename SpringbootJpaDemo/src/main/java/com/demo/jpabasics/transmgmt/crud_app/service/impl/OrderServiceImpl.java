@@ -15,9 +15,16 @@ import java.util.UUID;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-
-    private OrderRepository orderRepository;
-    private PaymentRepository paymentRepository;
+    /**
+     * We must keep the fields in the class as final, especially if we are using constructor injection.
+     * The reason is that it will make the class and fields immutable from the beginning only after the object
+     * creation through the constructor injection.
+     * This is reason we should alway prefer the constructor injection over setter injection, since in setter
+     * injection, the fields (which are and should always be final unless required specifically) assignments will happen after the object creation through setter injection. So there is
+     * always a gap left between object creation and setter injection.
+     */
+    final private OrderRepository orderRepository;
+    final private PaymentRepository paymentRepository;
 
     public OrderServiceImpl(OrderRepository orderRepository, PaymentRepository paymentRepository) {
         this.orderRepository = orderRepository;

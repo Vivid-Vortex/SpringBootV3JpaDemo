@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.demo.jpabasics.non_crud_junit_tested.entity"
+        basePackages = {"com.demo.jpabasics.non_crud_junit_tested.entity", "com.demo.jpabasics"}
         , entityManagerFactoryRef = "ecommerceEntityManager"
 )
 public class EcommerceJpaConfig {
@@ -45,7 +45,7 @@ public class EcommerceJpaConfig {
 //    }
 
     @Bean(name = "ecommerceJpaProperties")
-    @Primary
+//    @Primary
     public JpaProperties ecommerceJpaProperties() {
         JpaProperties properties = new JpaProperties();
         setCommonJpaProperties(properties);
@@ -84,7 +84,7 @@ public class EcommerceJpaConfig {
     public LocalContainerEntityManagerFactoryBean ecommerceEntityManager() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(ecommerceDataSource());
-        em.setPackagesToScan("com.demo.jpabasics.non_crud_junit_tested.entity");
+        em.setPackagesToScan("com.demo.jpabasics.non_crud_junit_tested.entity", "com.demo.jpabasics");
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
