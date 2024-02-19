@@ -22,26 +22,26 @@
 
 # Dialect is important sometimes because hibernate will generate that particular database specific queries behind the scene.
 
-#spring:
-#    datasource:
-#        #    driver-class-name: #It will be provided by Spring-data-Jpa behind the scene from mysql connector jar provided in the build.gradle file. But if you have a specific driver requirement, you can add it within the datasource configuration block.
-#        password: Admin@12345
-#        url: jdbc:mysql://localhost:3306/ecommerce?allowPublicKeyRetrieval=true&useSSL=false
-#        username: root
-#    jpa:
-#        properties:
-#            hibernate:
-#                format_sql: true
-#        show-sql: true #to see the ddl statements, you must use ddl-auto type as somethign which does ddl commands such as create-drop. It won't work with update. Signe it is not dealing with ddl commands.
-#        open-in-view: false
-#        hibernate:
-#            ddl-auto: update
+spring:
+    datasource:
+        #    driver-class-name: #It will be provided by Spring-data-Jpa behind the scene from mysql connector jar provided in the build.gradle file. But if you have a specific driver requirement, you can add it within the datasource configuration block.
+        password: Admin@12345
+        url: jdbc:mysql://localhost:3306/ecommerce?allowPublicKeyRetrieval=true&useSSL=false
+        username: root
+    jpa:
+        properties:
+            hibernate:
+                format_sql: true
+        show-sql: true #to see the ddl statements, you must use ddl-auto type as somethign which does ddl commands such as create-drop. It won't work with update. Signe it is not dealing with ddl commands.
+        open-in-view: false
+        hibernate:
+            ddl-auto: update
 
 logging:
     level:
         org.hibernate.sql: DEBUG
 
-spring:
-    main:
-        allow-circular-references: true
-        allow-bean-definition-overriding: true
+#spring:
+#    main:
+#        allow-circular-references: true
+#        allow-bean-definition-overriding: true

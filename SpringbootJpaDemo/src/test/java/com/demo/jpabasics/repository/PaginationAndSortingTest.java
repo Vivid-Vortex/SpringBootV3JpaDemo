@@ -11,6 +11,10 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
+/**
+ * use the import sql data to import few rows inot the table:
+ * com/demo/jpabasics/non_crud_junit_tested/repository/sqlData/product_records_pagination_sorting.sql
+ */
 @SpringBootTest
 public class PaginationAndSortingTest {
 
